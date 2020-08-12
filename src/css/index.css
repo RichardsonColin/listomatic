@@ -77,6 +77,18 @@ button {
 }
 
 .alt-btn {
+  padding: 0.2em 0.5em;
+  border: 1px solid #8c0073;
+  border-radius: 5px;
+  background-color: #fff0;
+  color: #8c0073;
+}
+
+.alt-btn:hover {
+  background-color: #8c007308;
+}
+
+.alt-2-btn {
   background-color: transparent;
   padding: 0.2em 0.6em;
   border: 2px solid #fff;
@@ -88,7 +100,10 @@ button {
   transform: translateY(5px) translateX(5px);
 }
 
-.main-btn:focus,
-.alt-btn:focus {
+button[class*="-btn"] {
+  transition: all 0.1s linear;
+}
+
+button[class*="-btn"]:focus {
   outline: none;
 }
