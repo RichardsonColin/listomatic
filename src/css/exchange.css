@@ -7,13 +7,22 @@
   background-color: #f9f7fd;
 }
 
+.exchange h2 {
+  font-size: 1.1em;
+}
+
 .exchange button {
-  font-size: 0.6em;
+  font-size: 0.5em;
+  margin: 0 0.2em;
 }
 
 .exchange header {
   display: flex;
   justify-content: space-between;
+}
+
+.exchange header span {
+  font-size: 0.9em;
 }
 
 .exchange header div {
@@ -40,12 +49,17 @@
   margin-right: 0.5em;
 }
 
+.exchange main .exchange-pairs-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .exchange footer {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 }
 
-.exchange footer p {
+.exchange footer span {
   font-size: 0.5em;
 }
