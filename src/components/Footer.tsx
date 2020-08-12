@@ -10,13 +10,13 @@ function Footer() {
         </p>
         <div id="wallet-sources">
           <div>
-            <p><strong>BTC</strong>: asd87f6786asd8f76as87d6f876asdf</p> <button className="alt-btn">Copy</button>
+            <p><strong>BTC</strong>: asd87f6786asd8f76as87d6f876asdf</p> <button className="alt-2-btn">Copy</button>
           </div>
           <div>
-            <p><strong>ETH</strong>: asd87f6786asd8f76as87d6f876asdf</p> <button className="alt-btn">Copy</button>
+            <p><strong>ETH</strong>: asd87f6786asd8f76as87d6f876asdf</p> <button className="alt-2-btn">Copy</button>
           </div>
           <div>
-            <p><strong>LTC</strong>: asd87f6786asd8f76as87d6f876asdf</p> <button className="alt-btn">Copy</button>
+            <p><strong>LTC</strong>: asd87f6786asd8f76as87d6f876asdf</p> <button className="alt-2-btn">Copy</button>
           </div>
         </div>
       </div>
