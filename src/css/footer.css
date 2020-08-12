@@ -1,0 +1,30 @@
+.app-footer {
+  display: flex;
+  min-height: 14vh;
+  background-color: #16161d;
+  color: #eaeaea;
+}
+.app-footer > div:nth-child(1) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#wallet-sources {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: baseline;
+  font-size: 0.6em;
+}
+
+#wallet-sources > div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0.2em 0;
+}
+
+#wallet-sources button {
+  margin-left: 1em;
+}
