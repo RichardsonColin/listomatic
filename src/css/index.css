@@ -67,6 +67,14 @@ button {
   font-weight: 600;
 }
 
+button:focus {
+  outline: none;
+}
+
+textarea:focus {
+  outline: none;
+}
+
 .main-btn {
   padding: 0.2em 0.8em;
   border: 2px solid #000;
@@ -102,8 +110,4 @@ button {
 
 button[class*="-btn"] {
   transition: all 0.1s linear;
-}
-
-button[class*="-btn"]:focus {
-  outline: none;
 }
