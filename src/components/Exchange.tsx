@@ -1,104 +1,102 @@
 import React, { useEffect, useState } from 'react'
-import BasePair from './BasePair'
+import Quote from './Quote'
+import TradingList from './TradingList'
 import '../css/exchange.css';
 
-interface BasePairUI {
+interface QuoteUI {
   id: string;
   exchange_id: string;
   symbol: string;
   updated_at: string;
 }
 
-interface TradingPairUI {
-  id: string;
-  exchange_name: string;
-  base_pair_symbol: string;
-  cryptocurrency_symbol: string;
-}
-
 interface ExchangeProps {
   id: string;
   name: string;
   description: string;
-  website_url: string;
-  logo_url: string;
-  country_origin: string;
+  url: string;
+  image: string;
+  origin: string;
   grade: string;
   volume_24_hour: string;
   updated_at: string;
+  last_addition: string;
 }
 
 function Exchange(props: ExchangeProps) {
-  const [basePairsList, setBasePairsList] = useState<BasePairUI[]>([])
-  const [tradingPairsList, setTradingPairsList] = useState<TradingPairUI[]>([])
+  const [quoteList, setQuoteList] = useState<QuoteUI[]>([])
+  const [tradingPairsList, setTradingPairsList] = useState('')
 
-  const fetchBasePairs = async (exchangeId: string) => {
-    const basePairs = await fetch(`/exchanges/${exchangeId}/base-pairs`)
+  const fetchQuotes = async (exchangeId: string) => {
+    const quotes = await fetch(`/exchanges/${exchangeId}/assets`)
       .then(res => res.json())
-    basePairs.map((pair: any) => pair.exchange_id = exchangeId)
-    setBasePairsList(basePairs)
+    quotes.map((pair: any) => pair.exchange_id = exchangeId)
+
+    setQuoteList(quotes)
   }
 
-  const fetchTradingPairs = async (exchangeId: string, basePairId: string) => {
-    const tradingPairs = await fetch(`/exchanges/${exchangeId}/base-pairs/${basePairId}/cryptocurrencies`)
+  const fetchTradingPairs = async (exchangeId: string, quoteId: string) => {
+    const tradingPairs = await fetch(`/exchanges/${exchangeId}/assets/${quoteId}/cryptocurrencies`)
       .then(res => res.json())
-    // sort alphabetically by cryptocurrency symbol
-    tradingPairs.sort((a: any, b: any) => a.cryptocurrency_symbol.localeCompare(b.cryptocurrency_symbol))
-    setTradingPairsList(tradingPairs)
+    // sort alphabetically by cryptocurrency symbol, map to strings (e.g. 'BINANCE:DCRUSDT'), format as single string
+    const tradingPairsList = tradingPairs
+      .sort((a: any, b: any) => a.asset_symbol.localeCompare(b.asset_symbol))
+      .map((tradingPair: any, index: number) =>
+        `${tradingPair.exchange_name.toUpperCase()}:${tradingPair.asset_symbol.toUpperCase()}${tradingPair.quote_symbol.toUpperCase()}`
+      )
+      .join(',')
+    setTradingPairsList(tradingPairsList)
+  }
+
+  // TODO: export as helper
+  const numberWithCommas = (x: any) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   useEffect(() => {
-    fetchBasePairs(props.id)
+    fetchQuotes(props.id)
   }, [])
 
-  const updated = new Date(props.updated_at).toDateString()
-  const tradingPairsListString = tradingPairsList.map((tradingPair: TradingPairUI, index: number) =>
-    `${tradingPair.exchange_name.toUpperCase()}:${tradingPair.cryptocurrency_symbol}${tradingPair.base_pair_symbol}`
-  )
-
+  const updated = new Date(props.last_addition).toDateString()
   return (
     <article className="exchange">
       <header>
         <div>
           {
-            props.logo_url !== null &&
-            <a href={props.website_url} target="#">
-              <img src={props.logo_url} alt={`logo for ${props.name}`} />
+            props.image !== null &&
+            <a href={props.url} target="#">
+              <img src={props.image} alt={`logo for ${props.name}`} />
             </a>
           }
           <h2>{props.name}</h2>
         </div>
         <div>
           <span>
-            <strong>24H Volume</strong>: {parseFloat(props.volume_24_hour) > 0 ?
-              `${parseFloat(props.volume_24_hour).toFixed(0)} BTC` :
+            <strong>24Hr Volume</strong>: {parseFloat(props.volume_24_hour) > 0 ?
+              `${numberWithCommas(parseFloat(props.volume_24_hour).toFixed(0))} BTC` :
               'Unknown'}
           </span>
-          <span><strong>Grade</strong>: {props.grade}</span>
+          <span>
+            <strong>Rating</strong>: {props.grade !== null ?
+              `${props.grade}/10` :
+              '-'}
+          </span>
         </div>
       </header>
       <main>
         <div className="exchange-pairs-container">
-          {basePairsList.length > 0 &&
-            basePairsList.map((basePair: BasePairUI) => (
-              <BasePair key={basePair.id} {...basePair} fetchTradingPairs={fetchTradingPairs} />
+          {quoteList.length > 0 &&
+            quoteList.map((quote: QuoteUI) => (
+              <Quote key={quote.id} {...quote} fetchTradingPairs={fetchTradingPairs} />
             ))
           }
         </div>
         {/* TODO: make into component */}
-        {tradingPairsList.length > 0 &&
-          <div className="textarea-wrap">
-            <div>
-              <button>Copy</button>
-              <button>Download</button>
-            </div>
-            <textarea defaultValue={tradingPairsListString.map(tradingPair => tradingPair)} />
-          </div>
-        }
+        <TradingList list={tradingPairsList} />
       </main>
       <footer>
-        <span><strong>Origin</strong>: {props.country_origin}</span>
-        <span><strong>Updated</strong>: {updated}</span>
+        <span><strong>Origin</strong>: {props.origin || 'Unknown'}</span>
+        <span><strong>Last Trading Pair Added</strong>: {updated}</span>
       </footer>
     </article>
   )
