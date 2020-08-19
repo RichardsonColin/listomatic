@@ -1,0 +1,26 @@
+.search-form-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search-form-container form {
+  display: flex;
+}
+
+.search-form-container form label {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 0.6em
+}
+
+.search-form-container form input {
+  padding: 0 0.4em;
+  width: 15em;
+  height: 100%;
+  font-size: 0.8em;
+}
+
+.search-form-container button {
+  margin: 0 0.5em;
+}

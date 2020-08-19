@@ -1,0 +1,27 @@
+.textarea-container {
+  position: relative;
+}
+
+.textarea-container button {
+  margin: 0;
+  background: #4c00c1;
+  color: #ffffff;
+  font-size: 0.4em;
+}
+
+.textarea-container textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 0.2em 0.5em;
+  margin-top: 1em;
+  box-shadow: rgb(109, 109, 109) 0px 0px 1px;
+  border-radius: 3px;
+  font-size: 0.45em;
+  resize: vertical;
+}
+
+.textarea-wrap div:first-child {
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+}
