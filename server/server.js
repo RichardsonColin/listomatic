@@ -10,10 +10,9 @@ const helmet = require('helmet')
 const cors = require('cors')
 
 // Import routes
-const homeRouter = require('./routes/home-route')
+// const homeRouter = require('./routes/home-route')
 const exchangesRouter = require('./routes/exchanges-route')
-const cryptocurrenciesRouter = require('./routes/cryptocurrencies-route')
-const basePairsRouter = require('./routes/base-pairs-route')
+const assetsRouter = require('./routes/assets-route')
 
 // Setup default port
 const PORT = process.env.SERVER_PORT || 8000
@@ -35,22 +34,19 @@ if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
 }
 
 // Implement route for '/api' endpoint
-app.use('/api', homeRouter)
+// app.use('/api', homeRouter)
 // Implement route for '/exchanges' endpoint
 app.use('/exchanges', exchangesRouter)
-// Implement route for '/cryptocurrencies' endpoint
-app.use('/cryptocurrencies', cryptocurrenciesRouter)
-// Implement route for '/base-pairs' endpoint
-app.use('/base-pairs', basePairsRouter)
+// Implement route for '/assets' endpoint
+app.use('/assets', assetsRouter)
 // Default route for inexistent endpoint
 app.use((req, res, next) => {
-    res.status(404).send('Ah ah ah! You didn\'t say the magic word!')
-    // .render('404_error_template', {title: "Sorry, page not found"});
+  res.status(404).send('Ah ah ah! You didn\'t say the magic word!')
 });
 // Implement route for errors
 app.use((err, req, res, next) => {
-   console.error(err.stack)
-   res.status(500).send('Something broke!')
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
 })
 
 // Start express app

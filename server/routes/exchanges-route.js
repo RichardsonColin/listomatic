@@ -7,7 +7,7 @@ const router = express.Router()
 // Create routes between exchangesController and endpoints
 router.get('/', exchangesController.exchangesGetAll)
 router.get('/:id', exchangesController.exchangesGetOne)
-router.get('/:id/base-pairs', exchangesController.exchangesGetBasePairs)
-router.get('/:exchange_id/base-pairs/:base_pair_id/cryptocurrencies', exchangesController.exchangesGetTradingPairs)
+router.get('/:id/assets', exchangesController.exchangesGetAssets)
+router.get('/:exchangeId/assets/:assetId/cryptocurrencies', exchangesController.exchangesGetTradingPairs)
 // Export router
 module.exports = router

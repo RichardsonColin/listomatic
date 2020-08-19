@@ -10,12 +10,12 @@ const pool = new Pool({
 
 module.exports = {
   query: async (text, params) => {
-    const start = Date.now()
+    // const start = Date.now()
     try {
       const results = await pool.query(text, params)
-      const duration = Date.now() - start
+      // const duration = Date.now() - start
       // turn into logging fn
-      console.log('QUERY SUCCESS', { text, duration, rows: results.rowCount })
+      // console.log('QUERY SUCCESS', { text, duration, rows: results.rowCount })
       return results
     } catch (err) {
       // log err
