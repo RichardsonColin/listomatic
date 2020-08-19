@@ -1,0 +1,91 @@
+.donate-container {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  min-height: 14vh;
+  background-color: #16161d;
+  box-shadow: 0px -3px 5px #676767;
+  color: #eaeaea;
+}
+.donate-container > div:nth-child(1) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.donate-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 100;
+}
+
+.wallet-sources {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.6em;
+}
+
+.hide {
+  display: none;
+}
+
+.slideUp {
+  -webkit-animation: slideUp 0.7s ease;
+  -moz-animation: slideUp 0.7s ease;
+  animation: slideUp 0.7s ease;
+}
+
+@keyframes slideUp {
+  0% {
+    bottom: -100px;
+  }
+  50% {
+    bottom: 20px;
+  }
+  100% {
+    bottom: 0;
+  }
+}
+
+.slideDown {
+  -webkit-animation: slideDown 0.5s linear;
+  -moz-animation: slideDown 0.5s linear;
+  animation: slideDown 0.5s linear;
+}
+
+@keyframes slideDown {
+  0% {
+    bottom: 0;
+  }
+  50% {
+    bottom: -150px;
+  }
+  100% {
+    bottom: -250px
+  }
+}
+
+/* TODO: move to responsive css file */
+
+@media screen and (max-width: 1000px) {
+  .donate-container > div:nth-child(1) > p {
+    font-size: 0.75em;
+  }
+}
+
+@media screen and (max-width: 780px) {
+ .donate-container > div:nth-child(1) {
+   flex-direction: column;
+ }
+ .donate-container > div:nth-child(1) > p {
+    font-size: 1em;
+  }
+ .donate-btn {
+   top: 10px;
+   bottom: unset;
+   z-index: 9999;
+ }
+}

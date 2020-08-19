@@ -1,0 +1,23 @@
+.donation-address > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0.2em 0;
+}
+
+.donation-address button {
+  margin-left: 1em;
+}
+
+.donation-address button:hover {
+  background-color: #ffffff20;
+}
+
+.highlight {
+  border-radius: 5px;
+  background: -webkit-linear-gradient(#ffffff00, #41f6ff75);
+  background: -moz-linear-gradient(#ffffff00, #41f6ff75);
+  background: -o-linear-gradient(#ffffff00, #41f6ff75);
+  background: linear-gradient(#ffffff00, #41f6ff75);
+}
