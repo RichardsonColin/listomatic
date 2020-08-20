@@ -104,7 +104,8 @@ textarea:focus {
 }
 
 .alt-btn:hover {
-  background-color: #8c007308;
+  background-color: #bb279a;
+  color: #fff;
 }
 
 .alt-2-btn {
