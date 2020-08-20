@@ -63,8 +63,8 @@ function App() {
   }
 
   const onScroll = (evt: any) => {
-    let scrollHeight = evt.target.scrollHeight - evt.target.offsetHeight
-    let scrollPosition = evt.target.scrollTop
+    let scrollHeight = scrollElm.scrollHeight - scrollElm.offsetHeight
+    let scrollPosition = scrollElm.scrollTop
 
     if (!isFetching && !maxReached) {
       // Fetch if 95% scrolled
