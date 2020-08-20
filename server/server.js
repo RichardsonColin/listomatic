@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const compression = require('compression')
 const helmet = require('helmet')
+const path = require('path')
 const cors = require('cors')
 
 // Import routes
@@ -28,8 +29,10 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 
 if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
+    app.use(express.static(__dirname + "/build"))
     app.get('*', (req, res) => {
-      res.sendFile('build/index.html', { root: __dirname })
+      // res.sendFile('./build/index.html', { root: __dirname })
+      res.sendFile(path.join(__dirname + '/index.html'))
   })
 }
 
