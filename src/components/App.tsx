@@ -63,7 +63,6 @@ function App() {
   }
 
   const onScroll = (evt: any) => {
-    console.log(scrollElm)
     let scrollHeight = scrollElm.current.scrollHeight - scrollElm.current.offsetHeight
     let scrollPosition = scrollElm.current.scrollTop
 
