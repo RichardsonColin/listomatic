@@ -28,20 +28,20 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(bodyParser.json())
 
-if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
-    app.use(express.static(__dirname + "/build"))
-    app.get('*', (req, res) => {
-      // res.sendFile('./build/index.html', { root: __dirname })
-      res.sendFile(path.join(__dirname + '/index.html'))
-  })
-}
-
-// Implement route for '/api' endpoint
-// app.use('/api', homeRouter)
 // Implement route for '/exchanges' endpoint
 app.use('/exchanges', exchangesRouter)
 // Implement route for '/assets' endpoint
 app.use('/assets', assetsRouter)
+
+if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
+  // Serve the static files from the React app
+  app.use(express.static(path.join(__dirname, '/build')))
+    // app.use(express.static(__dirname + "/build"))
+    app.get('*', (req, res) => {
+      // res.sendFile('./build/index.html', { root: __dirname })
+      res.sendFile(path.join(`${__dirname}/index.html`))
+  })
+}
 // Default route for inexistent endpoint
 app.use((req, res, next) => {
   res.status(404).send('Ah ah ah! You didn\'t say the magic word!')
