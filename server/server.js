@@ -15,7 +15,7 @@ const exchangesRouter = require('./routes/exchanges-route')
 const assetsRouter = require('./routes/assets-route')
 
 // Setup default port
-const PORT = process.env.SERVER_PORT || 8000
+const PORT = process.env.PORT || 8000
 // Create express app
 const app = express()
 // Implement middleware
