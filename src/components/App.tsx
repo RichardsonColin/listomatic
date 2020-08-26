@@ -73,7 +73,7 @@ function App() {
   }
 
   useEffect(() => {
-    fetchExchanges(filter, limit)
+    fetchExchanges('', limit)
   }, [])
 
   return (
