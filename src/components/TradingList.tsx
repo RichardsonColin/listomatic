@@ -10,19 +10,19 @@ const CopyToClipboard = require('react-copy-to-clipboard')
 
 
 interface TradingListProps {
-  list: string;
+  tradingPairsList: string;
 }
 
 function TradingList(props: TradingListProps) {
   // const [copySuccess, setCopySuccess] = useState(false)
 
   return (
-    <div className={`textarea-container ${props.list.length ? 'fade-in' : 'fade-out'}`}>
-      {props.list.length &&
+    <div className={`textarea-container ${props.tradingPairsList.length ? 'fade-in' : 'fade-out'}`}>
+      {props.tradingPairsList.length &&
         <div className="textarea-wrap">
           <div>
             {document.queryCommandSupported('copy') &&
-              <CopyToClipboard text={props.list}
+              <CopyToClipboard text={props.tradingPairsList}
               // onCopy={() => { setCopySuccess(true) }}
               >
                 <button>Copy</button>
@@ -31,7 +31,7 @@ function TradingList(props: TradingListProps) {
             {/* <button>Download</button> */}
           </div>
           <textarea
-            value={props.list}
+            value={props.tradingPairsList}
             onChange={evt => null}
           />
         </div>
