@@ -67,8 +67,8 @@ function App() {
     let scrollPosition = scrollElm.current.scrollTop
 
     if (!isFetching && !maxReached) {
-      // Fetch if 95% scrolled
-      (scrollPosition / scrollHeight) * 100 > 95 && fetchMoreExchanges()
+      // Fetch if 90% scrolled
+      (scrollPosition / scrollHeight) * 100 > 90 && fetchMoreExchanges()
     }
   }
 
