@@ -23,6 +23,21 @@ interface ExchangeProps {
   last_addition: string;
 }
 
+// TODO: move to helper
+// Convert descrepencies between internal api_id and generally used real-world symbol
+const parseApiIds = (data: any) => {
+  const converter: Record<string, string> = {
+    gdax: 'coinbase'
+  }
+
+  return data.map((d: any) =>
+    ({
+      ...d,
+      api_id: d.api_id in converter ? converter[d.api_id] : d.api_id
+    })
+  )
+}
+
 function Exchange(props: ExchangeProps) {
   const [quoteList, setQuoteList] = useState<QuoteUI[]>([])
   const [tradingPairsList, setTradingPairsList] = useState('')
@@ -38,11 +53,12 @@ function Exchange(props: ExchangeProps) {
   const fetchTradingPairs = async (exchangeId: string, quoteId: string) => {
     const tradingPairs = await fetch(`/exchanges/${exchangeId}/assets/${quoteId}/cryptocurrencies`)
       .then(res => res.json())
+    const parsedTradingPairs = parseApiIds(tradingPairs)
     // sort alphabetically by cryptocurrency symbol, map to strings (e.g. 'BINANCE:DCRUSDT'), format as single string
-    const tradingPairsList = tradingPairs
+    const tradingPairsList = parsedTradingPairs
       .sort((a: any, b: any) => a.asset_symbol.localeCompare(b.asset_symbol))
       .map((tradingPair: any, index: number) =>
-        `${tradingPair.exchange_name.toUpperCase()}:${tradingPair.asset_symbol.toUpperCase()}${tradingPair.quote_symbol.toUpperCase()}`
+        `${tradingPair.api_id.toUpperCase()}:${tradingPair.asset_symbol.toUpperCase()}${tradingPair.quote_symbol.toUpperCase()}`
       )
       .join(',')
     setTradingPairsList(tradingPairsList)
@@ -92,7 +108,7 @@ function Exchange(props: ExchangeProps) {
           }
         </div>
         {/* TODO: make into component */}
-        <TradingList list={tradingPairsList} />
+        <TradingList tradingPairsList={tradingPairsList} />
       </main>
       <footer>
         <span><strong>Origin</strong>: {props.origin || 'Unknown'}</span>
