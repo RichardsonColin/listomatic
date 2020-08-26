@@ -39,6 +39,7 @@ exports.exchangesGetAssets = async (req, res) => {
     INNER JOIN assets a2
     ON a2.id = ref.asset_id
     WHERE ref.exchange_id = $1
+    AND ref.is_stale = FALSE
     AND a1.symbol != a2.symbol
     ORDER BY a1.symbol;`, [id])
   res.json(rows)
@@ -46,7 +47,7 @@ exports.exchangesGetAssets = async (req, res) => {
 
 exports.exchangesGetTradingPairs = async (req, res) => {
   const { exchangeId, assetId } = req.params
-  const { rows } = await db.query(`SELECT DISTINCT ref.id, e.api_id AS exchange_name, a1.symbol AS quote_symbol, a2.symbol AS asset_symbol
+  const { rows } = await db.query(`SELECT DISTINCT ref.id, e.api_id AS api_id, a1.symbol AS quote_symbol, a2.symbol AS asset_symbol
     FROM exchange_asset_pair_references ref
     INNER JOIN exchanges e
     ON e.id = ref.exchange_id
