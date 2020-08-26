@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: listomatic.herokuapp.com
+Token: 125dbddd1afcb4d80fb2f930bb96c89f7b793114476f434e12b686d7bfc5a8c5
