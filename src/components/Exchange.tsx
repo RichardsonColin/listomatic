@@ -6,7 +6,7 @@ import '../css/exchange.css';
 interface QuoteUI {
   id: string;
   exchange_id: string;
-  symbol: string;
+  quote_symbol: string;
   updated_at: string;
 }
 
@@ -103,7 +103,7 @@ function Exchange(props: ExchangeProps) {
         <div className="exchange-pairs-container">
           {quoteList.length > 0 &&
             quoteList.map((quote: QuoteUI) => (
-              <Quote key={quote.id} {...quote} fetchTradingPairs={fetchTradingPairs} />
+              <Quote key={quote.quote_symbol} {...quote} fetchTradingPairs={fetchTradingPairs} />
             ))
           }
         </div>
