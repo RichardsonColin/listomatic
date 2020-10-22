@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-// import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect } from 'react-router-dom';
 import SearchForm from './SearchForm'
 import Exchange from './Exchange'
 
