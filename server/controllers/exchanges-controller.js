@@ -38,7 +38,7 @@ exports.exchangesGetOne = async (req, res) => {
   res.json(rows[0])
 }
 
-exports.exchangesGetAssets = async (req, res) => {
+exports.exchangesGetQuotes = async (req, res) => {
   const { id } = req.params
   const { rows } = await db.query(`SELECT DISTINCT quote_symbol
     FROM exchange_asset_pair_references
@@ -46,6 +46,17 @@ exports.exchangesGetAssets = async (req, res) => {
     AND is_stale = FALSE
     AND quote_symbol != asset_symbol
     ORDER BY quote_symbol;`, [id])
+  res.json(rows)
+}
+
+exports.exchangesGetAssets = async (req, res) => {
+  const { id } = req.params
+  const { rows } = await db.query(`SELECT DISTINCT quote_symbol, asset_symbol, created_at
+    FROM exchange_asset_pair_references
+    WHERE exchange_id = $1
+    AND is_stale = FALSE
+    AND quote_symbol != asset_symbol
+    ORDER BY created_at DESC;`, [id])
   res.json(rows)
 }
 
