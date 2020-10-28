@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from "react-router-dom";
 import Quote from './Quote'
 import TradingList from './TradingList'
 import '../css/exchange.css';
@@ -43,7 +44,7 @@ function Exchange(props: ExchangeProps) {
   const [tradingPairsList, setTradingPairsList] = useState('')
 
   const fetchQuotes = async (exchangeId: string) => {
-    const quotes = await fetch(`/exchanges/${exchangeId}/assets`)
+    const quotes = await fetch(`/exchanges/${exchangeId}/quotes`)
       .then(res => res.json())
     quotes.map((pair: any) => pair.exchange_id = exchangeId)
 
@@ -112,7 +113,12 @@ function Exchange(props: ExchangeProps) {
       </main>
       <footer>
         <span><strong>Origin</strong>: {props.origin || 'Unknown'}</span>
-        <span><strong>Last Trading Pair Added</strong>: {updated}</span>
+        <span>
+          <Link to={`history/${props.id}`}>
+            (View history)
+          </Link>
+          <strong>Last Trading Pair Added</strong>: {updated}
+        </span>
       </footer>
     </article>
   )
