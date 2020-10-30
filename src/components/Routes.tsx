@@ -1,7 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, RouteComponentProps } from 'react-router-dom';
+import ExchangeHistory from './ExchangeHistory'
 import SearchForm from './SearchForm'
 import Exchange from './Exchange'
+
+interface MatchParams {
+  id: string;
+}
+
+interface MatchProps extends RouteComponentProps<MatchParams> {
+}
 
 // TODO: App wide - implement general hooks
 
@@ -98,8 +106,12 @@ function Routes() {
       </main>
     </div>
   }
-  const getHistory = () => {
-    return <div></div>
+  const getHistory = ({ match }: MatchProps) => {
+    const { params } = match
+    return <main className="app-main">
+      <ExchangeHistory {...params} />
+    </main>
+
   }
   return (
     <Switch>
