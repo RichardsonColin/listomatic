@@ -114,10 +114,10 @@ function Exchange(props: ExchangeProps) {
       <footer>
         <span><strong>Origin</strong>: {props.origin || 'Unknown'}</span>
         <span>
+          <strong>Last Trading Pair Added</strong>: {updated}{' '}
           <Link to={`history/${props.id}`}>
             (View history)
           </Link>
-          <strong>Last Trading Pair Added</strong>: {updated}
         </span>
       </footer>
     </article>
