@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
-// import '../css/donate.css';
+import '../css/exchange-history.css';
 
 interface ExchangeHistoryUI {
   quote_symbol: string;
   asset_symbol: string;
   created_at: string;
-
 }
 
 interface ExchangeHistoryProps {
@@ -19,8 +18,38 @@ function ExchangeHistory(props: ExchangeHistoryProps) {
   const getExchangeHistory = async () => {
     const list = await fetch(`/exchanges/${props.id}/assets`)
       .then(res => res.json())
-    setExchangeStartDate(list.slice(-1)[0].created_at)
+    setExchangeStartDate(new Date(list.slice(-1)[0].created_at).toLocaleDateString())
     setExchangeAssets(list)
+  }
+
+  const displayHistoryList = () => {
+    let dateToDisplay = ''
+    let setDate = false
+
+    return exchangeAssets.length ?
+      exchangeAssets.map((item: ExchangeHistoryUI) => {
+        let itemDate = new Date(item.created_at).toLocaleDateString()
+        if (dateToDisplay !== itemDate) {
+          dateToDisplay = itemDate
+          setDate = true
+        } else {
+          setDate = false
+        }
+
+        if (exchangeStartDate !== itemDate) {
+          return <div key={`${item.quote_symbol}-${item.asset_symbol}`} className="history-wrapper">
+            {setDate ?
+              <div className="history-date">{dateToDisplay}</div> :
+              null
+            }
+            <span className="history-asset">
+              {item.quote_symbol}:{item.asset_symbol}
+            </span>
+          </div>
+        }
+        return null
+      }) :
+      null
   }
 
   useEffect(() => {
@@ -30,17 +59,7 @@ function ExchangeHistory(props: ExchangeHistoryProps) {
   return (
     <div>
       <div>
-        {
-          exchangeAssets.length > 0 &&
-          exchangeAssets.map((item: ExchangeHistoryUI) => (
-            // <DonationAddress key={address.id} {...address} />
-            new Date(exchangeStartDate).toLocaleDateString() !== new Date(item.created_at).toLocaleDateString() ?
-              <div>
-                {item.asset_symbol} : {new Date(item.created_at).toLocaleDateString()}
-              </div> :
-              null
-          ))
-        }
+        {displayHistoryList()}
       </div>
     </div>
   )
