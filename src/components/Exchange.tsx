@@ -11,7 +11,7 @@ interface QuoteUI {
   updated_at: string;
 }
 
-interface ExchangeProps {
+interface Props {
   id: string;
   name: string;
   description: string;
@@ -28,18 +28,19 @@ interface ExchangeProps {
 // Convert descrepencies between internal api_id and generally used real-world symbol
 const parseApiIds = (data: any) => {
   const converter: Record<string, string> = {
-    gdax: 'coinbase'
+    gdax: 'coinbase',
+    'ftx_spot': 'ftx'
   }
 
   return data.map((d: any) =>
-    ({
-      ...d,
-      api_id: d.api_id in converter ? converter[d.api_id] : d.api_id
-    })
+  ({
+    ...d,
+    api_id: d.api_id in converter ? converter[d.api_id] : d.api_id
+  })
   )
 }
 
-function Exchange(props: ExchangeProps) {
+function Exchange(props: Props) {
   const [quoteList, setQuoteList] = useState<QuoteUI[]>([])
   const [tradingPairsList, setTradingPairsList] = useState('')
 
