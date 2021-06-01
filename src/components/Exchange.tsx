@@ -116,9 +116,9 @@ function Exchange(props: Props) {
         <span><strong>Origin</strong>: {props.origin || 'Unknown'}</span>
         <span>
           <strong>Last Trading Pair Added</strong>: {updated}{' '}
-          <Link to={`history/${props.id}`}>
+          {/* <Link to={`history/${props.id}`}>
             (View history)
-          </Link>
+          </Link> */}
         </span>
       </footer>
     </article>
