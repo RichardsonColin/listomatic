@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Switch, Route, Redirect, RouteComponentProps } from 'react-router-dom';
-import ExchangeHistory from './ExchangeHistory'
+// import ExchangeHistory from './ExchangeHistory'
 import SearchForm from './SearchForm'
 import Exchange from './Exchange'
 
@@ -106,13 +106,12 @@ function Routes() {
       </main>
     </div>
   }
-  const getHistory = ({ match }: MatchProps) => {
-    const { params } = match
-    return <main className="app-main">
-      <ExchangeHistory {...params} />
-    </main>
-
-  }
+  // const getHistory = ({ match }: MatchProps) => {
+  //   const { params } = match
+  //   return <main className="app-main">
+  //     <ExchangeHistory {...params} />
+  //   </main>
+  // }
   return (
     <Switch>
       <Route
@@ -120,7 +119,7 @@ function Routes() {
         path='/'
         render={getAllExchanges}
       />
-      <Route exact path='/history/:id' render={getHistory} />
+      {/* <Route exact path='/history/:id' render={getHistory} /> */}
       <Redirect to='/' />
     </Switch>
   );
