@@ -8,4 +8,4 @@ The React app is served from a NodeJS express app. To run in the development env
 
 This project is built using Webpack.
 
-[Visit the Listomatic API repo](https://github.com/RichardsonColin/listomatic-api)
+[Visit the Listomatic Jobs repo](https://github.com/RichardsonColin/listomatic-jobs)
